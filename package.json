@@ -1,0 +1,22 @@
+{
+  "name": "flujo-maximo",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.html",
+  "dependencies": {
+    "angular-animate": "^1.6.4",
+    "angular-aria": "^1.6.4",
+    "angular": "^1.6.4",
+    "angular-material": "^1.1.4",
+    "angular-material-icons": "^0.7.1",
+    "angular-material-data-table": "^0.10.10",
+    "md-data-table": "^2.2.0",
+    "md-icons": "^1.0.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Luis Enrique González Rodríguez",
+  "license": "MIT"
+}

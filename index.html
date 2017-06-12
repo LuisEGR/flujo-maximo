@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html ng-app="flujoMaximoApp" ng-controller="flujoMaximoController">
+	<head>
+		<meta charset="utf-8"/>
+		<title>{{test}}</title>
+
+
+		<link rel="stylesheet" href="./node_modules/angular-material/angular-material.min.css">
+		<link rel="stylesheet" href="./node_modules/angular-material-data-table/dist/md-data-table.min.css">
+    <link rel="stylesheet" href="./lib/font-awesome-4.7.0/css/font-awesome.min.css">
+
+
+    <script src="./node_modules/jquery/dist/jquery.js"></script>
+    <script src="./node_modules/lodash/index.js"></script>
+    <script src="./node_modules/angular/angular.js"></script>
+    <script src="./node_modules/angular-aria/angular-aria.js"></script>
+    <script src="./node_modules/angular-animate/angular-animate.js"></script>
+    <script src="./node_modules/angular-material/angular-material.js"></script>
+    <script src="./node_modules/angular-sanitize/angular-sanitize.js"></script>
+    <script src="./node_modules/angular-material-icons/angular-material-icons.js"></script>
+    <script src="./node_modules/angular-material-data-table/dist/md-data-table.min.js"></script>
+
+    <script type="text/javascript" src="lib/jquery-3.1.1.min.js"></script>
+    <script type="text/javascript" src="lib/d3.v3.min.js"></script>
+    <script type="text/javascript" src="lib/dagre-d3.min.js"></script>
+
+		<script type="text/javascript" src="./js/fordFulkerson.js"></script>
+    <script type="text/javascript" src="./js/flujoMaximo.app.js"></script>
+		<script type="text/javascript" src="./js/demo.db.js"></script>
+    <script type="text/javascript" src="./js/flujoMaximo.controller.js"></script>
+
+
+    <link rel="stylesheet" type="text/css" href="css/grafica.css">
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+	</head>
+	<body>
+		<div id='titulo'>
+			<h1 style="margin-bottom:0">Flujo Máximo</h1>
+			<h5 style="margin-top:0">Algoritmo de Ford-Fulkerson</h5>
+		</div>
+		<br><br>
+
+
+		<div id='dcanvas'>
+			<!-- <canvas id="micanvas" height='600' whidth='1000'></canvas> -->
+      <svg height='600' width='1000' class="svg"><g/></svg>
+			<div class="indicador">
+				Flujo Máximo ({{entrada}} → {{salida}}): <b>{{max | number : 1}}</b>
+			</div>
+
+			<br><br>
+			<md-card style="width: 600px;margin: 0 auto">
+			<md-list flex>
+				<md-subheader class="md-no-sticky" style="font-size: 20pt">Mostrar Rutas</md-subheader>
+				<md-list-item ng-repeat-start="camino in caminosDisponibles">
+					<md-checkbox ng-model="caminoAMostrar[$index]" ng-change="reDraw()"> </md-checkbox>
+					<b ng-repeat="(idx, nodo) in camino">
+						<b ng-if="nodo.origen == camino[idx-1].destino">
+							 → {{nodo.destino}}
+						</b>
+						<b ng-if="nodo.origen != camino[idx-1].destino">
+							{{nodo.origen}} → {{nodo.destino}}
+						</b>
+					</b>
+				</md-list-item>
+				<md-divider ng-repeat-end></md-divider>
+			</md-list>
+			</md-card>
+
+		</div>
+
+		<section style="width: 100%">
+			<br><br>
+
+
+
+			<md-card  style="width: 500px;margin: 0 auto; padding: 20px">
+				<h2>Nodos base</h2>
+				<table style="width:100%">
+					<tr>
+						<td>
+							<md-input-container class="md-block" flex-gt-sm>
+								<label>Entrada</label>
+								<md-select ng-model="entrada" ng-change="reDraw()">
+									<md-option ng-value="nodo" ng-repeat="nodo in nodos" ng-disabled="nodo == salida">
+										{{nodo}}
+									</md-option>
+								</md-select>
+							</md-input-container>
+						</td>
+
+						<td>
+							<md-input-container class="md-block" flex-gt-sm>
+								<label>Salida</label>
+								<md-select ng-model="salida" ng-change="reDraw()">
+									<md-option ng-value="nodo" ng-repeat="nodo in nodos" ng-disabled="nodo == entrada">
+										{{nodo}}
+									</md-option>
+								</md-select>
+							</md-input-container>
+						</td>
+					</tr>
+				</table>
+
+			</md-card>
+			<br><br>
+
+
+
+			<div style="width: 1000px;margin: 0 auto">
+				<md-card>
+				<md-toolbar class="md-table-toolbar md-default" >
+	        <div class="md-toolbar-tools">
+	          <span>Rutas</span>
+					<div flex></div>
+					 <!-- <md-button class="md-icon-button" ng-click="loadStuff()">
+						 <md-icon><i class="fa fa-plus"></i></md-icon>
+					 </md-button> -->
+				 </div>
+	      </md-toolbar>
+				<md-table-container>
+				  <table md-table>
+				    <thead md-head>
+				      <tr md-row>
+				        <th md-column><span>ID</span></th>
+				        <th md-column>Nodo Inicial</th>
+				        <th md-column>Nodo Final</th>
+				        <th md-column>Flujo</th>
+								<th md-column>Flujo Inverso</th>
+				        <th md-column>Eliminar</th>
+				      </tr>
+				    </thead>
+				    <tbody md-body>
+				      <tr md-row ng-repeat="nodo in transiciones">
+								<td md-cell>{{$index +1}}</td>
+								<td md-cell>{{nodo.origen}}</td>
+								<td md-cell>{{nodo.destino}}</td>
+								<td md-cell>{{nodo.flujo}}</td>
+								<td md-cell>{{nodo.flujoInverso}}</td>
+								<td md-cell>
+									<md-button class="md-icon-button" ng-click="eliminarNodo($index)">
+										<md-icon><i class="fa fa-trash" style="color: #e91e63"></i></md-icon>
+									</md-button>
+								</td>
+				      </tr>
+				    </tbody>
+						<tfoot>
+							<tr>
+								<td style="text-align: center"><i class="fa fa-plus"></i></td>
+								<td>
+									<md-input-container>
+										<label>Origen</label>
+										<input type="text" ng-model="newTransition.origen">
+									</md-input-container>
+								</td>
+								<td>
+									<md-input-container>
+										<label>Destino</label>
+										<input type="text" ng-model="newTransition.destino">
+									</md-input-container>
+								</td>
+								<td>
+									<md-input-container>
+										<label>Flujo</label>
+										<input type="number" ng-model="newTransition.flujo">
+									</md-input-container>
+								</td>
+								<td>
+									<md-input-container>
+										<label>Flujo Inverso</label>
+										<input type="number" ng-model="newTransition.flujoInverso">
+									</md-input-container>
+								</td>
+								<td>
+									<md-button style="background: #009688;" ng-click="agregarTransicion(newTransition)" class="md-block md-raised md-primary">
+										Agregar
+									</md-button>
+								</td>
+							</tr>
+						</tfoot>
+				  </table>
+				</md-table-container>
+    </md-card>
+			</div>
+		</section>
+		<br><br><br>
+
+<footer>
+	<img src="./img/busto-ipn.png" class="logoIPN">
+	<img src="./img/logoescom.png" class="logoESCOM">
+	<div class="creditos">
+		<h1>Instituto Politécnico Nacional</h1>
+		<h1>Escuela Superior de Cómputo</h1>
+		<br>
+		<h2>U.A. Métodos Cuantitativos para la Toma de Decisiones</h2>
+		<h2>Prof. M. en C. José Cruz Martinez Perales</h2>
+		<h2>Grupo 3CV7</h2>
+		<h3>Integrantes:</h3>
+		<ul>
+			<li>González Rodríguez Luis Enrique</li>
+			<li>Alarcón Zamudio Rafael Sebastián Arturo</li>
+			<li>Sotelo Rojano Alfonso Israel</li>
+			<li>Jaimes Mackay Carlos Alejandro</li>
+			<li>Juarez Sosa Juan Francisco</li>
+		</ul>
+</div>
+
+</footer>
+
+	</body>
+</html>

@@ -1,0 +1,228 @@
+@font-face {
+    font-family: Roboto;
+    src: url("./fonts/Roboto-Regular.ttf");
+}
+
+html, body{
+	background-color: #eceff1;
+  font-family: Roboto;
+
+  background-image: url(../img/busto-ipn.png);
+    background-repeat: no-repeat;
+    background-size: 910px;
+    background-position-x: 655px;
+    background-attachment: fixed;
+    background-blend-mode: screen;
+}
+
+.botones{
+	margin: 1.5em;
+	background: rgba(153,102,51,.5);
+	border: solid 0;
+	color: rgba(255,255,255,.7);
+	padding: 10px;
+	border-radius: 0.2em;
+}
+
+.campo{
+	width: 6em;
+	height: 1.5em;
+	margin: 0.5em;
+	border-radius: 0.3em;: solid 2px rgba(255,255,255,.1);
+}
+
+.contenido{
+	width: 400px;
+	height: 230px;
+	background-color: rgba(0,0,0,.7);
+	padding: 0.5em;
+	color: rgba(255,255,255,0.7);
+	border-radius: 0.5em;
+	position: absolute;
+	top:50%;
+	margin-left: -200px;
+	margin-top: -100px;
+	left:50%;
+	--webkit-transition: all .5s;
+    -o-transition: all .5s;
+    transition: all .5s;
+}
+
+#formulario0{
+	display: none;
+	text-align: center;
+}
+
+#formulario1{
+	display: none;
+	text-align: center;
+}
+
+#formulario2{
+	display: none;
+	text-align: center;
+}
+
+#formulario2 .contenido .campo{
+	width: 7em;
+}
+
+#actualizar{
+	width: 50px;
+	height: 50px;
+	position:fixed;
+	top:0px;
+	right:0px;
+	margin:1em;
+	--webkit-transition: all .3s;
+    -o-transition: all .3s;
+    transition: all .3s;
+}
+
+#actualizar:hover{
+	width: 65px;
+	height: 65px;
+}
+
+#micanvas{
+	/*border: 5px solid #CFCFCF;
+	background-color: #EEEEEE;
+	width: 1000px;
+	height: 600px;
+	box-shadow:
+	1px 1px #474747,
+	2px 2px #474747,
+	3px 3px #474747,
+	4px 4px #474747,
+	5px 5px #474747,
+	6px 6px #474747,
+	7px 7px #474747,
+	8px 8px #474747,
+	9px 9px #474747,
+	10px 10px #474747;*/
+}
+
+#dcanvas{
+	text-align: center;
+	display: block;
+}
+
+#titulo{
+  background: #6C193F;
+      padding: 1px;
+      text-align: center;
+      font-family: Roboto;
+      /* text-shadow: 1px 1px 0px black, 1px 2px 0px black, 0px 0px 2px black; */
+      font-size: 30px;
+      color: #ECEFF1;
+      border-color: #1A1A4C #1A1A4C #1A1A4C;
+
+      background-image: url(../img/busto-ipn.png);
+background-blend-mode: hard-light;
+background-repeat: no-repeat;
+background-size: 910px;
+background-position-x: 655px;
+}
+
+#botones{
+	padding-top: 30px;
+	display: block;
+}
+
+.linea{
+	display: inline-block;
+	margin: 10px;
+	text-align: center;
+}
+
+.boton{
+	width: 200px;
+	height: 80px;
+	border-radius: 10px;
+	color: #FFD633;
+	font: bold 20px HelveticaNeue, Arial;
+}
+
+.boton.blanco{
+  background: #333385;
+  border-color: #333385 #333385 #333385;
+  box-shadow: 0 1px 1px #eaeaea;
+  color: #FFCC00;
+}
+
+.boton:hover{
+    background: #1A1A4C;
+    border-color: #1A1A4C #1A1A4C #1A1A4C;
+    box-shadow: 0 1px 1px #333385;
+    color: #B28F00;
+}
+.indicador{
+  padding: 25px;
+  font-size: 28pt;
+}
+
+
+table.md-table td.md-cell{
+  font-size: 18px;
+  text-align: center;
+}
+
+table.md-table tbody tr:nth-child(odd){
+  background: #eceff1;
+}
+
+table.md-table td.md-cell, table.md-table th.md-column{
+  font-size: 18px;
+  text-align: center;
+}
+
+footer{
+   position: relative;
+bottom: 0;
+height: auto;
+background: #6C193F;
+padding: 20px;
+background-image: url(../img/busto-ipn.png);
+background-blend-mode: hard-light;
+background-repeat: no-repeat;
+background-size: 2060px;
+}
+
+.logoIPN{
+  position: relative;
+  width: 500px;
+  left: 15px;
+  margin-left: -105px;
+  margin-right: -101px;
+}
+.logoESCOM{
+  margin: 0 0 -205px 0;
+  width: 250px;
+  position: absolute;
+  filter: grayscale(1) brightness(100);
+  opacity: 0.3;
+  padding: 7px;
+  top: 85px;
+  right: 35px;
+  border-radius: 31px;
+}
+.creditos{
+  width: 670px;
+  margin: 0 auto;
+  position: relative;
+  margin: 0 auto;
+  /* left: 55px; */
+  top: -270px;
+  color: rgba(255,255,255,0.9);
+  text-align: center;
+}
+.creditos > h1, .creditos > h2{
+  margin: 0;
+}
+
+ul{
+  font-size: 15pt;
+}
+ul > li{
+  list-style: none;
+}

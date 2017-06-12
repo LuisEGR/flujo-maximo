@@ -1,0 +1,20 @@
+{
+  "name": "flujo-maximo",
+  "version": "1.0.0",
+  "description": "Solición de Flujo Máximo usando el algoritmo de Ford-Fulkerson",
+  "main": "index.html",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "flujo",
+    "maximo",
+    "metodo",
+    "transporte",
+    "ford",
+    "fulkerson",
+    "ford-fulkerson"
+  ],
+  "author": "Luis E. González Rodríguez",
+  "license": "MIT"
+}

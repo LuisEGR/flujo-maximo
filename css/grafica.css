@@ -1,0 +1,58 @@
+
+.plotContainer{
+  width: 100%;
+  min-width: 1000px;
+  min-height: 1000px;
+}
+.svg{
+  background: #ffffff;
+  font-family: Roboto;
+  border-radius: 37px;
+  box-shadow: 4px 5px 10px rgba(96, 125, 139, 0.19);
+}
+
+
+.valid {
+  opacity: 1;
+  white-space: nowrap; }
+
+.invalid {
+  opacity: 0.3;
+  white-space: nowrap; }
+
+.c {
+  text-align: center; }
+
+.checkerInput {
+  font-family: Montserrat;
+  font-size: 15pt; }
+
+.btnV {
+  margin-top: 8px;
+  font-family: Montserrat;
+  /* width: 80px; */
+  padding: 5px 14px;
+  border-radius: 3px;
+  border: 0;
+  /* height: 25px; */
+  background: #03A9F4;
+  color: white;
+  font-size: 15pt; }
+
+.cntr {
+  width: 100%;
+  text-align: center; }
+
+.node rect {
+  stroke: rgba(96, 125, 139, 0.57);
+  fill: #fff; }
+
+.edgePath path {
+  /*stroke: #333;*/
+  stroke: rgba(96, 125, 139, 0.57);
+  fill: #333;
+  stroke-width: 1.5px; }
+
+tspan{
+  fill: rgba(0, 0, 0, 0.73);
+}
